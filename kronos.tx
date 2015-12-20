@@ -1,0 +1,26 @@
+Kron:
+	'kronos:' 
+	jobs += Job
+;
+
+Description:
+	('-')? 'description:' content=STRING
+;
+
+Url:
+	'url' location=STRING
+;
+
+Job:
+	desc = Description
+	url = Url
+	schedule = Schedule
+;
+
+Schedule:
+	'every' n=INT unit=Unit
+;
+
+Unit:
+	'hours' | 'mins' | 'minutes'
+;
