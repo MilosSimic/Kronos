@@ -6,6 +6,7 @@ class Kronos(object):
 	def __init__(self, grammar='kronos.tx', kron_file='test.kronos'):
 		meta_model = metamodel_from_file(grammar)
 		self.model = meta_model.model_from_file(kron_file)
+		self.number_of_tasks = len(self.model)
 		
 
 kron = Kronos()
