@@ -1,0 +1,7 @@
+Kron:
+	'kronos:' descriptions += Description
+;
+
+Description:
+	('-')? 'description:' content=STRING
+;
