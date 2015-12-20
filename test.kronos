@@ -1,7 +1,7 @@
 kronos:
 - description: "Hello world"
   url "milos/test"
-  every 3 hours
+  every 3 hours from "10:00" to "18:15"
 - description: "Hello world"
   url "novi/test"
   every 2 minutes

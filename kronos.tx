@@ -18,9 +18,22 @@ Job:
 ;
 
 Schedule:
-	'every' n=INT unit=Unit
+	Every | Ordinal
+;
+
+
+Every:
+	'every' n=INT unit=Unit (when = From)?
 ;
 
 Unit:
 	'hours' | 'mins' | 'minutes'
+;
+
+From:
+	'from' start=STRING 'to' end=STRING
+;
+
+Ordinal:
+	'milos'
 ;

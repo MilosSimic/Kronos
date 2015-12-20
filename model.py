@@ -14,3 +14,6 @@ for job in kron.model.jobs:
 	print job.desc.content
 	print job.url.location
 	print "every {} {}".format(job.schedule.n, job.schedule.unit)
+	if job.schedule.when:
+		print "from {} to {}".format(job.schedule.when.start, job.schedule.when.end)
+	print
