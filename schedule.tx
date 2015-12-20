@@ -1,0 +1,35 @@
+Schedule:
+	Every | Selective
+;
+
+Every:
+	'every' n=INT unit=Unit (when=From)?
+;
+
+Unit:
+	'hours' | 'mins' | 'minutes'
+;
+
+From:
+	'from' start=STRING 'to' end=STRING
+;
+
+Ordinal:
+	'1st'|'2nd'|'3d'
+;
+
+Day:
+	'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'
+;
+
+Selective:
+	ordinal=Ordinal[','] days=Day[','] (monthspec=Monthspec)? time=STRING
+;
+
+Month:
+	'jan'|'feb'|'mar'|'apr'|'march'|'sep'|'oct'|'nov'|'dec'
+;
+
+Monthspec:
+	'of' months=Month[',']
+;

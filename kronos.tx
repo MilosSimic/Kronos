@@ -1,58 +1,20 @@
+import description
+import action
+import schedule
+import secure
+
 Kron:
 	'kronos:' 
 	jobs += Job
-;
-
-Description:
-	('-')? 'description:' content=STRING
-;
-
-Url:
-	'url:' location=STRING
-;
-
-Method:
-	'method:' name=STRING
 ;
 
 Job:
 	desc = Description
 	url = Url
 	schedule = Schedule
+	(secure = Secure)?
 ;
 
-Schedule:
-	Every | Selective
-;
-
-Every:
-	'every' n=INT unit=Unit (when=From)?
-;
-
-Unit:
-	'hours' | 'mins' | 'minutes'
-;
-
-From:
-	'from' start=STRING 'to' end=STRING
-;
-
-Ordinal:
-	'1st'|'2nd'
-;
-
-Day:
-	'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'
-;
-
-Selective:
-	ordinal=Ordinal[','] days=Day[','] (monthspec=Monthspec)? time=STRING
-;
-
-Month:
-	'jan'|'feb'|'mar'|'sep'|'oct'|'nov'
-;
-
-Monthspec:
-	'of' months=Month[',']
+Comment:
+  /\/\/.*$/
 ;
