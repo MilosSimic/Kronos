@@ -8,7 +8,11 @@ Description:
 ;
 
 Url:
-	'url' location=STRING
+	'url:' location=STRING
+;
+
+Method:
+	'method:' name=STRING
 ;
 
 Job:
@@ -18,12 +22,11 @@ Job:
 ;
 
 Schedule:
-	Every | Ordinal
+	Every | Selective
 ;
 
-
 Every:
-	'every' n=INT unit=Unit (when = From)?
+	'every' n=INT unit=Unit (when=From)?
 ;
 
 Unit:
@@ -35,5 +38,21 @@ From:
 ;
 
 Ordinal:
-	'milos'
+	'1st'|'2nd'
+;
+
+Day:
+	'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'
+;
+
+Selective:
+	ordinal=Ordinal[','] days=Day[','] (monthspec=Monthspec)? time=STRING
+;
+
+Month:
+	'jan'|'feb'|'mar'|'sep'|'oct'|'nov'
+;
+
+Monthspec:
+	'of' months=Month[',']
 ;

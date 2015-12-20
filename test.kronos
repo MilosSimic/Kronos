@@ -1,7 +1,10 @@
 kronos:
-- description: "Hello world"
-  url "milos/test"
-  every 3 hours from "10:00" to "18:15"
-- description: "Hello world"
-  url "novi/test"
-  every 2 minutes
+- description: "Test last part"
+  url: "idem/negde/sada"
+  1st mon of sep,oct,nov "17:00"
+- description: "Koji djavo"
+  url: "idemo/opa/bato"
+  1st,2nd mon,wed,thu of jan "17:00"
+- description: "Test sa every"
+  url: "ko/da/je/bitno"
+  every 10 hours from "10:18" to "20:20"
