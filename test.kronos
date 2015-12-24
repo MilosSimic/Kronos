@@ -2,6 +2,7 @@ kronos:
 - description: "Test last part"
   url: /idem/negde/sada/
   1st mon of sep,oct,nov 17:00
+  target: v1
   security: "AVBGFTTY"
   sync: true
   priority: 1

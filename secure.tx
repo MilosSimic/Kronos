@@ -9,3 +9,11 @@ Sync:
 Priority:
 	'priority:' level=INT
 ;
+
+Version:
+	name = /^([0-9a-zA-Z])+$/
+;
+
+Target:
+	'target:' version = Version
+;

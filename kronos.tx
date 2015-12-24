@@ -12,6 +12,7 @@ Job:
 	desc = Description
 	url = Url
 	schedule = Schedule
+	(target = Target)?
 	(secure = Secure)?
 	(sync = Sync)?
 	(priority = Priority)?
