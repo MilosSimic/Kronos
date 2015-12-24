@@ -1,3 +1,7 @@
 Url:
-	'url:' location=STRING
+	'url:' location=Location
+;
+
+Location:
+	path = /^\/(([a-zA-Z0-9])*\/)*$/
 ;

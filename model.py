@@ -13,14 +13,14 @@ kron = Kronos()
 
 for job in kron.model.jobs:
 	print job.desc.content
-	print job.url.location
+	print job.url.location.path
 
 	if hasattr(job.schedule, 'ordinal'):
 		print job.schedule.ordinal
 		print job.schedule.days
 		print job.schedule.monthspec.months
-		print job.schedule.time
+		print job.schedule.when.time
 	else:
-		print 'nema'
+		print job.schedule.when.start.time, job.schedule.when.end.time
 
 	print

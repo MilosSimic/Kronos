@@ -1,12 +1,15 @@
 kronos:
 - description: "Test last part"
-  url: "idem/negde/sada"
-  1st mon of sep,oct,nov "17:00"
-  
+  url: /idem/negde/sada/
+  1st mon of sep,oct,nov 17:00
+  security: "AVBGFTTY"
+  sync: true
+  priority: 1
+
 - description: "Koji djavo"
-  url: "idemo/opa/bato"
-  1st,2nd mon,wed,thu of jan "17:00"
+  url: /idemo/opa/bato/
+  1st,2nd mon,wed,thu of jan 17:00
 
 - description: "Test sa every"
-  url: "ko/da/je/bitno"
-  every 10 hours from "10:18" to "20:20"
+  url: /ko/da/je/bitno/
+  every 10 hours from 10:18 to 20:20

@@ -1,13 +1,9 @@
 Secure:
-	key=STRING
+	'security:' key=STRING
 ;
 
 Sync:
-	'sync:' value=Boolean
-;
-
-Boolean:
-	'true' | 'false'
+	'sync:' value=BOOL
 ;
 
 Priority:
