@@ -13,6 +13,8 @@ Job:
 	url = Url
 	schedule = Schedule
 	(secure = Secure)?
+	(sync = Sync)?
+	(priority = Priority)?
 ;
 
 Comment:

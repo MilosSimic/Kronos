@@ -1,3 +1,15 @@
 Secure:
-	login=STRING
+	key=STRING
+;
+
+Sync:
+	'sync:' value=Boolean
+;
+
+Boolean:
+	'true' | 'false'
+;
+
+Priority:
+	'priority:' level=INT
 ;

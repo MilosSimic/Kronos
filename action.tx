@@ -1,7 +1,3 @@
-Description:
-	('-')? 'description:' content=STRING
-;
-
 Url:
 	'url:' location=STRING
 ;
