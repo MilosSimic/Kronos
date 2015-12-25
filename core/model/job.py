@@ -11,3 +11,7 @@ class Job(object):
 
 	def do_job(self):
 		pass
+
+	def __str__(self):
+		return repr("Desc {}, URL {}, Schedule {}, Priority {}, Security {}, Target {}, Sync {}"
+			.format(self.description, self. url, self.schedule, self.priority, self.security, self.target, self.sync))
