@@ -8,7 +8,9 @@ class Selective(Schedule):
 		self.ordinal_list = ordinal_list
 		self.days_list = days_list
 		self.month_list = month_list
-		#self.when = when
+
+	def execute(self):
+		pass
 
 	def __str__(self):
 		if self.month_list:
