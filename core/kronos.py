@@ -1,7 +1,9 @@
 from textx.metamodel import metamodel_from_file
 from os import path
 from processors import every_command_processor, priority_command_processor
-from model import Job
+from model import Job, Every, Selective, When
+from utils import cmp_time_string
+from exceptions import LogicException
 
 class Kronos(object):
 	"""docstring for Kronos"""
@@ -22,24 +24,17 @@ class Kronos(object):
 		for job in model.jobs:
 			kron_job = Job(job.desc.content, job.url.location.path)
 
-			print kron_job.url
-			print kron_job.description
-
 			if hasattr(job.priority, 'level'):
 				kron_job.priority = job.priority.level
-				print kron_job.priority
 
 			if hasattr(job.target, 'version'):
 				kron_job.target = job.target.version.name
-				print kron_job.target
 
 			if hasattr(job.sync, 'value'):
 				kron_job.sync = job.sync.value
-				print kron_job.sync
 
 			if hasattr(job.secure, 'key'):
 				kron_job.secure = job.secure.key
-				print kron_job.secure
 
 			if hasattr(job.schedule, 'ordinal'):
 				print job.schedule.ordinal
@@ -47,7 +42,12 @@ class Kronos(object):
 				print job.schedule.monthspec.months
 				print job.schedule.when.time
 			else:
-				print job.schedule.when.start.time, job.schedule.when.end.time
-				print job.schedule.n, job.schedule.unit
+				scheduled = Every(job.schedule.n, job.schedule.unit)
 
-			print
+				if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
+					if not cmp_time_string(job.schedule.when.start.time, job.schedule.when.end.time):
+						raise LogicException("end time must be greather then start time!")
+
+					kron_job.when = When(job.schedule.when.start.time, job.schedule.when.end.time)
+
+				kron_job.schedule = scheduled
