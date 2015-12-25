@@ -3,7 +3,7 @@ from core import Kronos
 
 kron = Kronos()
 
-for job in kron.model.jobs:
+'''for job in kron.model.jobs:
 	print job.desc.content
 	print job.url.location.path
 
@@ -15,4 +15,4 @@ for job in kron.model.jobs:
 	else:
 		print job.schedule.when.start.time, job.schedule.when.end.time
 
-	print
+	print'''

@@ -13,4 +13,4 @@ kronos:
 
 - description: "Test sa every"
   url: /ko/da/je/bitno/
-  every 10 hours from 10:18 to 20:20
+  every 0 hours from 10:18 to 20:20
