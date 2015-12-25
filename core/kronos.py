@@ -20,9 +20,6 @@ class Kronos(object):
 
 		self._process(self._model, self._number_of_tasks)
 
-		for job in self.jobs_list:
-			print job
-
 	def _process(self, model, number_of_tasks):
 		for job in model.jobs:
 			kron_job = Job(job.desc.content, job.url.location.path)
@@ -37,7 +34,7 @@ class Kronos(object):
 				kron_job.sync = job.sync.value
 
 			if hasattr(job.secure, 'key'):
-				kron_job.secure = job.secure.key
+				kron_job.security = job.secure.key
 
 			when = None
 
