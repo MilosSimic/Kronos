@@ -39,20 +39,18 @@ class Kronos(object):
 			if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
 				if not cmp_time_string(job.schedule.when.start.time, job.schedule.when.end.time):
 					raise LogicException("end time must be greather then start time!")
-
-				kron_job.when = When(job.schedule.when.start.time, job.schedule.when.end.time)
-
-			schedule = None
+				else:
+					kron_job.when = When(job.schedule.when.start.time, job.schedule.when.end.time)
 
 			if hasattr(job.schedule, 'ordinal'):
-				schedule = Selective(job.schedule.ordinal, job.schedule.days)
+				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days)
 				
 				if hasattr(job.schedule.monthspec, 'months'):
-					schedule.month_list = job.schedule.monthspec.months
+					kron_job.schedule.month_list = job.schedule.monthspec.months
 
 				if hasattr(job.schedule.when, 'time'):
 					kron_job.when = When(job.schedule.when.time)
 			else:
-				schedule = Every(job.schedule.n, job.schedule.unit)
+				kron_job.schedule = Every(job.schedule.n, job.schedule.unit)
 
-			kron_job.schedule.append(schedule)
+			self.jobs_list.append(kron_job)
