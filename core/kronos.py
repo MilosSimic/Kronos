@@ -20,6 +20,9 @@ class Kronos(object):
 
 		self._process(self._model, self._number_of_tasks)
 
+		for job in self.jobs_list:
+			print job
+
 	def _process(self, model, number_of_tasks):
 		for job in model.jobs:
 			kron_job = Job(job.desc.content, job.url.location.path)
@@ -36,11 +39,13 @@ class Kronos(object):
 			if hasattr(job.secure, 'key'):
 				kron_job.secure = job.secure.key
 
+			when = None
+
 			if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
 				if not cmp_time_string(job.schedule.when.start.time, job.schedule.when.end.time):
 					raise LogicException("end time must be greather then start time!")
 				else:
-					kron_job.when = When(job.schedule.when.start.time, job.schedule.when.end.time)
+					when = When(job.schedule.when.start.time, job.schedule.when.end.time)
 
 			if hasattr(job.schedule, 'ordinal'):
 				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days)
@@ -49,8 +54,10 @@ class Kronos(object):
 					kron_job.schedule.month_list = job.schedule.monthspec.months
 
 				if hasattr(job.schedule.when, 'time'):
-					kron_job.when = When(job.schedule.when.time)
+					when = When(job.schedule.when.time)
 			else:
 				kron_job.schedule = Every(job.schedule.n, job.schedule.unit)
+
+			kron_job.schedule.when = when
 
 			self.jobs_list.append(kron_job)
