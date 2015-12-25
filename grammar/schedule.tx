@@ -28,8 +28,12 @@ Day:
 	'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'|'every day'
 ;
 
+TimeSpecial:
+	From | Time
+;
+
 Selective:
-	ordinal=Ordinal[','] days=Day[','] (monthspec=Monthspec)? when=Time
+	ordinal=Ordinal[','] days=Day[','] (monthspec=Monthspec)? when=TimeSpecial
 ;
 
 Month:

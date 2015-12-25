@@ -7,10 +7,18 @@ kronos:
   sync: true
   priority: 1
 
+  - description: "Test last part"
+  url: /idem/negde/sada/
+  1st mon of sep,oct,nov from 17:00 to 18:00
+  target: v1
+  security: "AVBGFTTY"
+  sync: true
+  priority: 1
+
 - description: "Koji djavo"
   url: /idemo/opa/bato/
   1st,2nd mon,wed,thu of jan 17:00
 
 - description: "Test sa every"
   url: /ko/da/je/bitno/
-  every 0 hours from 10:18 to 20:20
+  every 1 hours from 10:18 to 20:20
