@@ -9,7 +9,7 @@ class Selective(Schedule):
 		self.days_list = days_list
 		self.month_list = month_list
 
-	def execute(self):
+	def execute(self, security, sync, target, url):
 		pass
 
 	def __str__(self):

@@ -3,6 +3,6 @@ class Schedule(object):
 	def __init__(self, when=None):
 		self.when = when
 
-	def execute(self):
+	def execute(self, security, sync, target, url):
 		pass
 		

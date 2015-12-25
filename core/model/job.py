@@ -10,7 +10,7 @@ class Job(object):
 		self.sync = sync
 
 	def do_job(self):
-		pass
+		self.schedule.execute(self.security, self.sync, self.target, self.url)
 
 	def __str__(self):
 		return repr("Desc {}, URL {}, Schedule {}, Priority {}, Security {}, Target {}, Sync {}"

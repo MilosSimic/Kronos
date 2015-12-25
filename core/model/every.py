@@ -8,7 +8,7 @@ class Every(Schedule):
 		self.time = time
 		self.unit = unit
 
-	def execute(self):
+	def execute(self, security, sync, target, url):
 		pass
 
 	def __str__(self):

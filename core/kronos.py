@@ -1,5 +1,4 @@
 from textx.metamodel import metamodel_from_file
-from os import path
 from processors import every_command_processor, priority_command_processor
 from model import Job, Every, Selective, When
 from utils import cmp_time_string
