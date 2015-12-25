@@ -1,6 +1,8 @@
-class Ordinal(object):
+class Selective(object):
 	"""docstring for Ordinal"""
-	def __init__(self, arg):
-		super(Ordinal, self).__init__()
-		self.arg = arg
+	def __init__(self, ordinal_list, days_list, month_list, when=None):
+		self.ordinal_list = ordinal_list
+		self.days_list = days_list
+		self.month_list = month_list
+		self.when = when
 		
