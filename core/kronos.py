@@ -1,5 +1,5 @@
 from textx.metamodel import metamodel_from_file
-from processors import every_command_processor, priority_command_processor
+from processors import every_command_processor, priority_command_processor,selective_command_processor
 from model import Job, Every, Selective, When
 from utils import cmp_time_string
 from exceptions import LogicException
@@ -12,6 +12,7 @@ class Kronos(object):
 
 		self._meta_model.register_obj_processors({'Every': every_command_processor})
 		self._meta_model.register_obj_processors({'Priority': priority_command_processor})
+		self._meta_model.register_obj_processors({'Selective': selective_command_processor})
 
 		self._model = self._meta_model.model_from_file(kron_file)
 		self._number_of_tasks = len(self._model.jobs)
