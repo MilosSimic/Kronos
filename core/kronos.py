@@ -3,6 +3,7 @@ from processors import every_command_processor, priority_command_processor
 from model import Job, Every, Selective, When
 from utils import cmp_time_string
 from exceptions import LogicException
+from Queue import PriorityQueue
 
 class Kronos(object):
 	"""docstring for Kronos"""
@@ -15,7 +16,7 @@ class Kronos(object):
 		self._model = self._meta_model.model_from_file(kron_file)
 		self._number_of_tasks = len(self._model.jobs)
 
-		self.jobs_list = []
+		self.queue = PriorityQueue()
 
 		self._process(self._model, self._number_of_tasks)
 
@@ -56,4 +57,15 @@ class Kronos(object):
 
 			kron_job.schedule.when = when
 
-			self.jobs_list.append(kron_job)
+			self.queue.put(kron_job)
+
+		def empty_queue(self):
+			while not self.queue.empty():
+				next_level = self.queue.get()
+				print 'Processing level:', next_level.description
+
+		def get_from_queue(self):
+			return self.queue.get()
+
+		def queue_size(self):
+			return self.queue.size()
