@@ -12,10 +12,12 @@ def trim_ordinal(ordinal):
 	return ordinal[:-2]
 
 def selective_command_processor(selective_command):
-	selective_command.ordinal = [trim_ordinal(ordinal) for ordinal in selective_command.ordinal]
+	ordinal = [trim_ordinal(ordinal) for ordinal in selective_command.ordinal]
+	selective_command.ordinal = ordinal
 
 	if selective_command.monthspec:
-		print [month.capitalize() for month in selective_command.monthspec.months]
+		months = [month.capitalize() for month in selective_command.monthspec.months]
+		selective_command.monthspec.months = months
 
 def priority_command_processor(job_command):
 	if job_command.level <= 0:
