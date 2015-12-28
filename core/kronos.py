@@ -4,24 +4,23 @@ from model import Job, Every, Selective, When
 from utils import cmp_time_string
 from exceptions import LogicException
 from Queue import PriorityQueue
+from worker import Worker
 
 class Kronos(object):
 	"""docstring for Kronos"""
-	def __init__(self, grammar='grammar/kronos.tx', kron_file='test.kronos'):
+	def __init__(self, grammar='grammar/kronos.tx', kron_file='test.kronos', blocking=True):
 		self._meta_model = metamodel_from_file(grammar)
-
-		self._meta_model.register_obj_processors({'Every': every_command_processor})
-		self._meta_model.register_obj_processors({'Priority': priority_command_processor})
-		self._meta_model.register_obj_processors({'Selective': selective_command_processor})
-
+		self._add_processors(self._meta_model)
 		self._model = self._meta_model.model_from_file(kron_file)
+
 		self._number_of_tasks = len(self._model.jobs)
-
 		self.queue = PriorityQueue()
+		self._process(self._model)
+		self.workers = []
 
-		self._process(self._model, self._number_of_tasks)
+		#self._start(self.queue, self.workers)
 
-	def _process(self, model, number_of_tasks):
+	def _process(self, model):
 		for job in model.jobs:
 			kron_job = Job(job.desc.content, job.url.location.path)
 
@@ -60,13 +59,28 @@ class Kronos(object):
 
 			self.queue.put(kron_job)
 
-		def empty_queue(self):
-			while not self.queue.empty():
-				next_level = self.queue.get()
-				print 'Processing level:', next_level.description
+	def _add_processors(metamodel):
+		metamodel.register_obj_processors({'Every': every_command_processor})
+		metamodel.register_obj_processors({'Priority': priority_command_processor})
+		metamodel.register_obj_processors({'Selective': selective_command_processor})
 
-		def get_from_queue(self):
-			return self.queue.get()
+	def empty_queue(self):
+		while not self.queue.empty():
+			next_level = self.queue.get()
+			print 'Processing level:', next_level.description
 
-		def queue_size(self):
-			return self.queue.size()
+	def get_from_queue(self):
+		return self.queue.get()
+
+	def queue_size(self):
+		return self.queue.size()
+
+	def _start(self, queue, workers):
+		while not queue.empty():
+			next_job = self.queue.get()
+			worker = Worker(,next_job, next_job.description, next_job.description)
+			workers.append(worker)
+
+		for worker in workers:
+			worker.start()
+			worker.join()

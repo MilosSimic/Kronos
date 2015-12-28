@@ -19,6 +19,9 @@ def selective_command_processor(selective_command):
 		months = [month.capitalize() for month in selective_command.monthspec.months]
 		selective_command.monthspec.months = months
 
+	days = [days.capitalize() for days in selective_command.days]
+	selective_command.days = days
+
 def priority_command_processor(job_command):
 	if job_command.level <= 0:
 		job_command.level = 1
