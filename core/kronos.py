@@ -1,7 +1,7 @@
 from textx.metamodel import metamodel_from_file
-from processors import every_command_processor, priority_command_processor,selective_command_processor
+from util import every_command_processor, priority_command_processor,selective_command_processor
 from model import Job, Every, Selective, When
-from utils import cmp_time_string
+from util import cmp_time_string
 from exceptions import LogicException
 from Queue import PriorityQueue
 from worker import Worker
@@ -59,7 +59,7 @@ class Kronos(object):
 
 			self.queue.put(kron_job)
 
-	def _add_processors(metamodel):
+	def _add_processors(self, metamodel):
 		metamodel.register_obj_processors({'Every': every_command_processor})
 		metamodel.register_obj_processors({'Priority': priority_command_processor})
 		metamodel.register_obj_processors({'Selective': selective_command_processor})
@@ -78,7 +78,7 @@ class Kronos(object):
 	def _start(self, queue, workers):
 		while not queue.empty():
 			next_job = self.queue.get()
-			worker = Worker(,next_job, next_job.description, next_job.description)
+			worker = Worker(next_job, next_job.description, next_job.description)
 			workers.append(worker)
 
 		for worker in workers:

@@ -18,8 +18,8 @@ class Worker(Thread):
 	def run(self):
 		while True:
 			if job.is_time_for_job():
-				LOCK.acquire()
+				#LOCK.acquire()
 				job.do_job()
-				LOCK.release()
+				#LOCK.release()
 			else:
 				sleep(self.nap_time)
