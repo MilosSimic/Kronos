@@ -9,6 +9,7 @@ class Worker(Thread):
 		self.setDaemon(isdaemon)
 		self.nap_time = nap_time
 		self.job = job
+		self.triggerStop = False
 
 	'''
 		When the run() method returns (or sys.exit() is called in the thread), 
@@ -16,7 +17,7 @@ class Worker(Thread):
 		The program will still be running as long as there is one running thread.
 	'''
 	def run(self):
-		while True:
+		while not self.triggerStop:
 			if job.is_time_for_job():
 				#LOCK.acquire()
 				job.do_job()

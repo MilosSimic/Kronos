@@ -19,8 +19,33 @@ def cmp_time_string(str_time1, str_time2, format="%H:%M"):
 	return t1 < t2
 
 def get_datetime_value(code):
-	return datetime.datetime.now().strftime(code)
+	return datetime.now().strftime(code)
 
 def end_values(year, month):
 	return calendar.monthrange(year, month)
+
+def get_weekday_number():
+	return datetime.datetime.today().weekday()
+
+def week_of_month():
+	testdate = datetime.datetime.now()
+	return (testdate.day+7-1)/7
+
+def day_of_week():
+	return datetime.now().strftime("%a")
+
+def month_of_year():
+	return datetime.now().strftime("%b")
+
+def calculate_today_data():
+	testdate = datetime.now()
+
+	week_num = (testdate.day+7-1)/7
+	day = testdate.strftime("%a")
+	month = testdate.strftime("%b")
+	hour = testdate.strftime("%H")
+	mins = testdate.strftime("%M")
+
+	return (week_num, day, month, hour, mins)
+
 	

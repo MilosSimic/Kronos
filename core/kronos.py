@@ -1,10 +1,12 @@
 from textx.metamodel import metamodel_from_file
-from util import every_command_processor, priority_command_processor,selective_command_processor
+from util import every_command_processor, priority_command_processor
+from util import selective_command_processor, time_command_processor
 from model import Job, Every, Selective, When
 from util import cmp_time_string
-from exceptions import LogicException
+from exception import LogicException
 from Queue import PriorityQueue
 from worker import Worker
+from datetime import time
 
 class Kronos(object):
 	"""docstring for Kronos"""
@@ -20,42 +22,62 @@ class Kronos(object):
 
 		#self._start(self.queue, self.workers)
 
+	def _collect_common_part(self, job, kron_job):
+		if hasattr(job.priority, 'level'):
+			kron_job.priority = job.priority.level
+
+		if hasattr(job.target, 'version'):
+			kron_job.target = job.target.version.name
+
+		if hasattr(job.sync, 'value'):
+			kron_job.sync = job.sync.value
+
+		if hasattr(job.secure, 'key'):
+			kron_job.security = job.secure.key
+
+	def _create_basic_with(self, job):
+		if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
+			if not job.schedule.when.start.time < job.schedule.when.end.time:
+				raise LogicException("end time must be greather then start time!")
+			else:
+				return When(job.schedule.when.start.time, job.schedule.when.end.time)
+		else:
+			return When(time(0, 0), time(23, 59))#if from to not given go for all day
+
+	def _collect_apendix_for_ordinal(self, job):
+		apendix = []
+
+		if hasattr(job.schedule.when, 'n'):
+			apendix.append(job.schedule.when.n)
+
+		if hasattr(job.schedule.when, 'unit'):
+			apendix.append(job.schedule.when.unit)
+
+		return apendix
+
 	def _process(self, model):
 		for job in model.jobs:
 			kron_job = Job(job.desc.content, job.url.location.path)
 
-			if hasattr(job.priority, 'level'):
-				kron_job.priority = job.priority.level
-
-			if hasattr(job.target, 'version'):
-				kron_job.target = job.target.version.name
-
-			if hasattr(job.sync, 'value'):
-				kron_job.sync = job.sync.value
-
-			if hasattr(job.secure, 'key'):
-				kron_job.security = job.secure.key
-
-			when = None
-
-			if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
-				if not cmp_time_string(job.schedule.when.start.time, job.schedule.when.end.time):
-					raise LogicException("end time must be greather then start time!")
-				else:
-					when = When(job.schedule.when.start.time, job.schedule.when.end.time)
+			self._collect_common_part(job, kron_job)
+			when = self._create_basic_with(job)
+			apendix = None
 
 			if hasattr(job.schedule, 'ordinal'):
-				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days)
+				if hasattr(job.schedule.when, 'time'):
+					when = When(job.schedule.when.time)
+				else:
+					apendix = self._collect_apendix_for_ordinal(job)
+
+				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days, when, apendix)
 				
 				if hasattr(job.schedule.monthspec, 'months'):
 					kron_job.schedule.month_list = job.schedule.monthspec.months
 
-				if hasattr(job.schedule.when, 'time'):
-					when = When(job.schedule.when.time)
 			else:
-				kron_job.schedule = Every(job.schedule.n, job.schedule.unit)
+				kron_job.schedule = Every(job.schedule.n, job.schedule.unit, when)
 
-			kron_job.schedule.when = when
+			#kron_job.schedule.when = when
 
 			self.queue.put(kron_job)
 
@@ -63,6 +85,7 @@ class Kronos(object):
 		metamodel.register_obj_processors({'Every': every_command_processor})
 		metamodel.register_obj_processors({'Priority': priority_command_processor})
 		metamodel.register_obj_processors({'Selective': selective_command_processor})
+		metamodel.register_obj_processors({'Time': time_command_processor})
 
 	def empty_queue(self):
 		while not self.queue.empty():
