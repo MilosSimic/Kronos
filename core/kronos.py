@@ -61,9 +61,10 @@ class Kronos(object):
 
 			self._collect_common_part(job, kron_job)
 			when = self._create_basic_with(job)
-			apendix = None
 
 			if hasattr(job.schedule, 'ordinal'):
+				apendix = None
+				
 				if hasattr(job.schedule.when, 'time'):
 					when = When(job.schedule.when.time)
 				else:

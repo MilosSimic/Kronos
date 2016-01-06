@@ -1,6 +1,7 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
 from ..exception.params import ArgsException
+from ..util.utils import decide_timedelta
 
 class Every(Schedule):
 	"""docstring for Continius"""
@@ -12,7 +13,7 @@ class Every(Schedule):
 		self.run_times = self._process_time()
 
 	def _process_time(self):
-		td = timedelta(self.time)
+		td = decide_timedelta(self.time, self.unit)
 
 		if len(self.when.time) == 2:
 			#because i can get only time, put some date just to can do timedelta

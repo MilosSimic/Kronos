@@ -1,6 +1,6 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
-from ..util.utils import calculate_today_data
+from ..util.utils import calculate_today_data, day_of_week
 from ..exception.params import ArgsException
 
 class Selective(Schedule):
@@ -11,9 +11,12 @@ class Selective(Schedule):
 		self.ordinal_list = ordinal_list
 		self.days_list = days_list
 		self.month_list = month_list
+		self.apendix = apendix
+		self.run_times = []
+			
 
 	def _process_time(self):
-		td = timedelta(self.time)
+		td = decide_timedelta(self.apendix[0], self.apendix[1])
 
 		if len(self.when.time) == 2:
 			#because i can get only time, put some date just to can do timedelta
@@ -32,17 +35,19 @@ class Selective(Schedule):
 		return times
 
 	def _process_ordinal(self):
-		week_num, day, month, hour, mins = calculate_today_data() #week num, day, month, hour, mins tuple
-
-		run_times = []
-
 		if len(self.when.times) == 1:
-			run_times.append(self.when.times[0])
-		elif len(self.when.times) < 0 or len(self.when.times) > 2:
+			d1 = datetime.combine(date.today(), self.when.time[0])
+			self.run_times.append(dt1.time())
+		elif len(self.when.times) == 2:
+			if apendix:
+				self.run_times = self._process_time()
+			else:
+				raise ArgsException("Args error, someting whent wrong with apendix")
+		else:
 			raise ArgsException("Args error, not valid amount of time arguments")
 
 	def execute(self, security, target, url):
-		pass
+		week_num, day, month, hour, mins = calculate_today_data() #week num, day, month, hour, mins tuple
 
 	def is_time_for_job(self):
 		pass

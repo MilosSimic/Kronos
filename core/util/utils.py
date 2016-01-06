@@ -48,4 +48,10 @@ def calculate_today_data():
 
 	return (week_num, day, month, hour, mins)
 
+def decide_timedelta(amount, value):
+	if value in 'minutes':
+		return timedelta(minutes=amount)
+	else:
+		return timedelta(hours=amount)
+
 	
