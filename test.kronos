@@ -9,7 +9,7 @@ kronos:
 
   - description: "Test last part"
   url: /idem/negde/sada/
-  1st mon of sep,oct,nov every 2 hours from 17:00 to 18:00
+  * mon of sep,oct,nov every 2 hours from 17:00 to 18:00
   target: v1
   security: "AVBGFTTY"
   sync: true
@@ -17,7 +17,7 @@ kronos:
 
 - description: "Koji djavo"
   url: /idemo/opa/bato/
-  31st,2nd mon,wed,thu of jan 17:00
+  first,2nd mon,wed,thu of jan 17:00
 
 - description: "Test sa every"
   url: /ko/da/je/bitno/

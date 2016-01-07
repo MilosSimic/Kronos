@@ -1,7 +1,7 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
-from ..exception.params import ArgsException
-from ..util.utils import decide_timedelta
+from ..exception import ArgsException
+from ..util import decide_timedelta
 
 class Every(Schedule):
 	"""docstring for Continius"""

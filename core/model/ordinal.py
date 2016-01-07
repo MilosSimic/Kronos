@@ -1,7 +1,7 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
-from ..util.utils import calculate_today_data, day_of_week
-from ..exception.params import ArgsException
+from ..util import calculate_today_data, day_of_week
+from ..exception import ArgsException
 
 class Selective(Schedule):
 	"""docstring for Ordinal"""

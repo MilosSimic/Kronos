@@ -54,4 +54,14 @@ def decide_timedelta(amount, value):
 	else:
 		return timedelta(hours=amount)
 
+def calendar_detail():
+	dt = datetime.now()
+
+	return calendar.monthcalendar(dt.year, dt.month)
+
+def week_count():
+	detail = calendar_detail()
+
+	return len(detail)
+
 	

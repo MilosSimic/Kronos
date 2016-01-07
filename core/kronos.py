@@ -64,7 +64,7 @@ class Kronos(object):
 
 			if hasattr(job.schedule, 'ordinal'):
 				apendix = None
-				
+
 				if hasattr(job.schedule.when, 'time'):
 					when = When(job.schedule.when.time)
 				else:
@@ -72,8 +72,8 @@ class Kronos(object):
 
 				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days, when, apendix)
 				
-				if hasattr(job.schedule.monthspec, 'months'):
-					kron_job.schedule.month_list = job.schedule.monthspec.months
+				if hasattr(job.schedule, 'months'):
+					kron_job.schedule.month_list = job.schedule.months
 
 			else:
 				kron_job.schedule = Every(job.schedule.n, job.schedule.unit, when)
@@ -83,10 +83,11 @@ class Kronos(object):
 			self.queue.put(kron_job)
 
 	def _add_processors(self, metamodel):
-		metamodel.register_obj_processors({'Every': every_command_processor})
-		metamodel.register_obj_processors({'Priority': priority_command_processor})
-		metamodel.register_obj_processors({'Selective': selective_command_processor})
-		metamodel.register_obj_processors({'Time': time_command_processor})
+		metamodel.register_obj_processors({
+			'Every': every_command_processor,
+			'Selective': selective_command_processor,
+			'Priority': priority_command_processor,
+			'Time': time_command_processor})
 
 	def empty_queue(self):
 		while not self.queue.empty():
