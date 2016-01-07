@@ -43,10 +43,10 @@ def calculate_today_data():
 	week_num = (testdate.day+7-1)/7
 	day = testdate.strftime("%a")
 	month = testdate.strftime("%b")
-	hour = testdate.strftime("%H")
-	mins = testdate.strftime("%M")
+	#hour = testdate.strftime("%H")
+	#mins = testdate.strftime("%M")
 
-	return (week_num, day, month, hour, mins)
+	return (week_num, day, month) #,hour, mins)
 
 def decide_timedelta(amount, value):
 	if value in 'minutes':

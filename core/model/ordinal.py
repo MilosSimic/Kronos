@@ -13,7 +13,6 @@ class Selective(Schedule):
 		self.month_list = month_list
 		self.apendix = apendix
 		self.run_times = []
-			
 
 	def _process_time(self):
 		td = decide_timedelta(self.apendix[0], self.apendix[1])
@@ -47,10 +46,12 @@ class Selective(Schedule):
 			raise ArgsException("Args error, not valid amount of time arguments")
 
 	def execute(self, security, target, url):
-		week_num, day, month, hour, mins = calculate_today_data() #week num, day, month, hour, mins tuple
+		pass
 
 	def is_time_for_job(self):
-		pass
+		week_num, day, month = calculate_today_data() #week num, day, month, hour, mins tuple
+
+		return week_num in ordinal_list and day in days_list and datetime.now().today() in self.run_times
 
 	def __str__(self):
 		if self.month_list:
