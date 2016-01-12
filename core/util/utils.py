@@ -46,7 +46,7 @@ def calculate_today_data():
 	#hour = testdate.strftime("%H")
 	#mins = testdate.strftime("%M")
 
-	return (week_num, day, month) #,hour, mins)
+	return (week_num, day, month, testdate.today())
 
 def decide_timedelta(amount, value):
 	if value in 'minutes':
@@ -54,13 +54,11 @@ def decide_timedelta(amount, value):
 	else:
 		return timedelta(hours=amount)
 
-def calendar_detail():
-	dt = datetime.now()
+def calendar_detail(year, month):
+	return calendar.monthcalendar(year, month)
 
-	return calendar.monthcalendar(dt.year, dt.month)
-
-def week_count():
-	detail = calendar_detail()
+def week_count(year, month):
+	detail = calendar_detail(year, month)
 
 	return len(detail)
 

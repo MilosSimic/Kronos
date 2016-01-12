@@ -2,11 +2,10 @@ from textx.metamodel import metamodel_from_file
 from util import every_command_processor, priority_command_processor
 from util import selective_command_processor, time_command_processor
 from model import Job, Every, Selective, When
-from util import cmp_time_string
 from exception import LogicException
 from Queue import PriorityQueue
 from worker import Worker
-from datetime import time
+from datetime import time, datetime
 
 class Kronos(object):
 	"""docstring for Kronos"""
@@ -70,15 +69,11 @@ class Kronos(object):
 				else:
 					apendix = self._collect_apendix_for_ordinal(job)
 
-				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days, when, apendix)
-				
-				if hasattr(job.schedule, 'months'):
-					kron_job.schedule.month_list = job.schedule.months
+				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days, 
+					when, apendix, job.schedule.months)
 
 			else:
 				kron_job.schedule = Every(job.schedule.n, job.schedule.unit, when)
-
-			#kron_job.schedule.when = when
 
 			self.queue.put(kron_job)
 

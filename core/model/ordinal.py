@@ -49,9 +49,9 @@ class Selective(Schedule):
 		pass
 
 	def is_time_for_job(self):
-		week_num, day, month = calculate_today_data() #week num, day, month, hour, mins tuple
+		week_num, day, month, today = calculate_today_data() #week num, day, month, today tuple
 
-		return week_num in ordinal_list and day in days_list and datetime.now().today() in self.run_times
+		return week_num in ordinal_list and day in days_list and today in self.run_times
 
 	def __str__(self):
 		if self.month_list:

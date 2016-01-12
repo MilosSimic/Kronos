@@ -17,7 +17,7 @@ kronos:
 
 - description: "Koji djavo"
   url: /idemo/opa/bato/
-  first,2nd mon,wed,thu of jan 17:00
+  first,2nd * of * 17:00
 
 - description: "Test sa every"
   url: /ko/da/je/bitno/

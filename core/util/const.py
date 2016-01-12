@@ -25,3 +25,5 @@ ordinal_dict = {'*':[1,2,3,4,5,6],'first':1, 'second':2, 'third':3, 'fourth':4, 
 days_dict = {'*':['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']}
 
 month_dict = {'*':['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
+
+month_val_dict = {'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12}
