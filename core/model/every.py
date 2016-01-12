@@ -26,8 +26,8 @@ class Every(Schedule):
 
 		#put only time, because we need to run this task every dan/month/year between the same time
 		while dt1 < dt2:
-			dt1 = dt1 + td
 			times.append(dt1.time())
+			dt1 = dt1 + td
 
 		return times
 

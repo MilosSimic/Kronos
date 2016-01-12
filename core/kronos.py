@@ -68,6 +68,8 @@ class Kronos(object):
 					when = When(job.schedule.when.time)
 				else:
 					apendix = self._collect_apendix_for_ordinal(job)
+					when = When(job.schedule.when.when.start.time,
+						job.schedule.when.when.end.time)
 
 				kron_job.schedule = Selective(job.schedule.ordinal, job.schedule.days, 
 					when, apendix, job.schedule.months)
@@ -88,6 +90,8 @@ class Kronos(object):
 		while not self.queue.empty():
 			next_level = self.queue.get()
 			print 'Processing level:', next_level.description
+			print next_level.schedule.run_times
+			print
 
 	def get_from_queue(self):
 		return self.queue.get()

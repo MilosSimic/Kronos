@@ -7,9 +7,9 @@ kronos:
   sync: true
   priority: 1
 
-  - description: "Test last part"
+  - description: "Novi test"
   url: /idem/negde/sada/
-  * mon of sep,oct,nov every 2 hours from 17:00 to 18:00
+  * mon of sep,oct,nov every 2 hours from 17:00 to 22:00
   target: v1
   security: "AVBGFTTY"
   sync: true
@@ -21,4 +21,4 @@ kronos:
 
 - description: "Test sa every"
   url: /ko/da/je/bitno/
-  every 1 hours synchronized
+  every 3 hours synchronized

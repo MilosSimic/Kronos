@@ -1,6 +1,6 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
-from ..util import calculate_today_data, day_of_week
+from ..util import calculate_today_data, day_of_week, decide_timedelta
 from ..exception import ArgsException
 
 class Selective(Schedule):
@@ -13,6 +13,8 @@ class Selective(Schedule):
 		self.month_list = month_list
 		self.apendix = apendix
 		self.run_times = []
+
+		self._process_ordinal()
 
 	def _process_time(self):
 		td = decide_timedelta(self.apendix[0], self.apendix[1])
@@ -27,18 +29,18 @@ class Selective(Schedule):
 		times = []
 
 		#put only time, because we need to run this task every dan/month/year between the same time
-		while dt1 <= dt2:
-			dt1 = dt1 + td
+		while dt1 < dt2:
 			times.append(dt1.time())
+			dt1 = dt1 + td
 
 		return times
 
 	def _process_ordinal(self):
-		if len(self.when.times) == 1:
-			d1 = datetime.combine(date.today(), self.when.time[0])
+		if len(self.when.time) == 1:
+			dt1 = datetime.combine(date.today(), self.when.time[0])
 			self.run_times.append(dt1.time())
-		elif len(self.when.times) == 2:
-			if apendix:
+		elif len(self.when.time) == 2:
+			if self.apendix:
 				self.run_times = self._process_time()
 			else:
 				raise ArgsException("Args error, someting whent wrong with apendix")
