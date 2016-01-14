@@ -3,8 +3,7 @@ from util import every_command_processor, priority_command_processor
 from util import selective_command_processor, time_command_processor
 from model import Job, Every, Selective, When
 from exception import LogicException
-from Queue import PriorityQueue
-from worker import Worker
+from worker import Worker, WorkersList
 from datetime import time, datetime
 
 class Kronos(object):
@@ -15,11 +14,12 @@ class Kronos(object):
 		self._model = self._meta_model.model_from_file(kron_file)
 
 		self._number_of_tasks = len(self._model.jobs)
-		self.queue = PriorityQueue()
-		self._process(self._model)
-		self.workers = []
+		
+		self.workers = WorkersList()
 
-		#self._start(self.queue, self.workers)
+		self._process(self._model)
+
+		#self.workers.start()
 
 	def _collect_common_part(self, job, kron_job):
 		if hasattr(job.priority, 'level'):
@@ -77,7 +77,7 @@ class Kronos(object):
 			else:
 				kron_job.schedule = Every(job.schedule.n, job.schedule.unit, when)
 
-			self.queue.put(kron_job)
+			self.workers.put_in_queue(kron_job)
 
 	def _add_processors(self, metamodel):
 		metamodel.register_obj_processors({
@@ -85,24 +85,3 @@ class Kronos(object):
 			'Selective': selective_command_processor,
 			'Priority': priority_command_processor,
 			'Time': time_command_processor})
-
-	def empty_queue(self):
-		while not self.queue.empty():
-			next_level = self.queue.get()
-			print 'Processing level:', next_level.description
-
-	def get_from_queue(self):
-		return self.queue.get()
-
-	def queue_size(self):
-		return self.queue.size()
-
-	def _start(self, queue, workers):
-		while not queue.empty():
-			next_job = self.queue.get()
-			worker = Worker(next_job, next_job.description, next_job.description)
-			workers.append(worker)
-
-		for worker in workers:
-			worker.start()
-			worker.join()
