@@ -90,8 +90,6 @@ class Kronos(object):
 		while not self.queue.empty():
 			next_level = self.queue.get()
 			print 'Processing level:', next_level.description
-			print next_level.schedule.run_times
-			print
 
 	def get_from_queue(self):
 		return self.queue.get()
