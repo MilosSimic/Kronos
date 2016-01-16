@@ -1,9 +1,12 @@
 from datetime import time
 from const import ordinal_dict, days_dict, month_dict
-from ..exception import ArgsException
+from ..exception import ArgsException, LogicException
 
 def every_command_processor(every_command):
-	if every_command.n <= 0:
+	if every_command.n < 0:
+		raise LogicException("Time can be positive number > 0!")
+
+	if every_command.n == 0:
 		every_command.n = 1
 
 	every_command.unit = every_command.unit[0:-1]

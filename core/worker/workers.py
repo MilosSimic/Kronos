@@ -1,4 +1,6 @@
 from Queue import PriorityQueue
+from ..exception import WorkerException
+from . import Worker
 
 class WorkersList(object):
 	"""docstring for WorkersList"""
@@ -27,10 +29,22 @@ class WorkersList(object):
 	def start(self):
 		self._collect_workers()
 
-		for worker in workers:
+		for worker in self.workers:
 			worker.start()
 			worker.join()
 
 	def put_in_queue(self, job):
 		self.queue.put(job)
+
+	def stop_single_worker(self, value):
+		for worker in self.workers:
+			if worker.name == value or worker.threadID == value:
+				worker.triggerStop = False
+				break
+		else:
+			raise WorkerException("Worker with name/id {}".format(value))
+
+	def stop_all_workers(self):
+		for worker in self.workers:
+			worker.triggerStop = False
 		

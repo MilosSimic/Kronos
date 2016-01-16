@@ -16,12 +16,12 @@ class Kronos(object):
 		self._number_of_tasks = len(self._model.jobs)
 		
 		self.workers = WorkersList()
-
 		self._process(self._model)
-
 		#self.workers.start()
 
-	def _collect_common_part(self, job, kron_job):
+	def _collect_common_part(self, job):
+		kron_job = Job(job.desc.content, job.url.location.path)
+
 		if hasattr(job.priority, 'level'):
 			kron_job.priority = job.priority.level
 
@@ -33,6 +33,8 @@ class Kronos(object):
 
 		if hasattr(job.secure, 'key'):
 			kron_job.security = job.secure.key
+
+		return kron_job
 
 	def _create_basic_with(self, job):
 		if hasattr(job.schedule.when, 'start') and hasattr(job.schedule.when, 'end'):
@@ -56,9 +58,7 @@ class Kronos(object):
 
 	def _process(self, model):
 		for job in model.jobs:
-			kron_job = Job(job.desc.content, job.url.location.path)
-
-			self._collect_common_part(job, kron_job)
+			kron_job = self._collect_common_part(job)
 			when = self._create_basic_with(job)
 
 			if hasattr(job.schedule, 'ordinal'):
