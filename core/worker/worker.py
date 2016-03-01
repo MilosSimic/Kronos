@@ -1,3 +1,4 @@
+"""
 from threading import Lock, Thread
 from time import sleep
 
@@ -24,3 +25,24 @@ class Worker(Thread):
 				#LOCK.release()
 			else:
 				sleep(self.nap_time)
+"""
+from multiprocessing import Process
+from time import sleep
+
+class Worker(Process):
+	def __init__(self, job, threadID, isdaemon=False, nap_time=1):
+		Process.__init__(self)
+		self.daemon = isdaemon
+		self.nap_time = nap_time
+		self.job = job
+		self.triggerStop = False
+
+	def run(self):
+		while not self.triggerStop:
+			if self.job.is_time_for_job():
+				self.job.do_job()
+			else:
+				sleep(self.nap_time)
+				print 'sleep', self.job.description
+
+		print "stop ", self.name

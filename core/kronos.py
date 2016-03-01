@@ -17,7 +17,7 @@ class Kronos(object):
 		
 		self.workers = WorkersList()
 		self._process(self._model)
-		#self.workers.start()
+		self.workers.start()
 
 	def _collect_common_part(self, job):
 		kron_job = Job(job.desc.content, job.url.location.path)

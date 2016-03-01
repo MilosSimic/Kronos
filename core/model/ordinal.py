@@ -47,13 +47,13 @@ class Selective(Schedule):
 		else:
 			raise ArgsException("Args error, not valid amount of time arguments")
 
-	def execute(self, security, target, url):
-		pass
+	'''def execute(self, security, target, url):
+		pass'''
 
 	def is_time_for_job(self):
 		week_num, day, month, today = calculate_today_data() #week num, day, month, today tuple
 
-		return week_num in ordinal_list and day in days_list and today in self.run_times
+		return week_num in self.ordinal_list and day in self.days_list and today in self.run_times
 
 	def sleep_time(self):
 		pass

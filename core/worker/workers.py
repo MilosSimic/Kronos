@@ -25,12 +25,12 @@ class WorkersList(object):
 			next_job = self.queue.get()
 			worker = Worker(next_job, next_job.description, next_job.description)
 			self.workers.append(worker)
+			worker.start()
 
 	def start(self):
 		self._collect_workers()
 
 		for worker in self.workers:
-			worker.start()
 			worker.join()
 
 	def put_in_queue(self, job):
@@ -38,7 +38,7 @@ class WorkersList(object):
 
 	def stop_single_worker(self, value):
 		for worker in self.workers:
-			if worker.name == value or worker.threadID == value:
+			if worker.name == value:
 				worker.triggerStop = False
 				break
 		else:
@@ -47,4 +47,16 @@ class WorkersList(object):
 	def stop_all_workers(self):
 		for worker in self.workers:
 			worker.triggerStop = False
+
+	def terminate_all_workers(self):
+		for worker in workers:
+			worker.terminate()
+
+	def terminate_single_worker(self, value):
+		for worker in self.workers:
+			if worker.name == value:
+				worker.terminate()
+				break
+		else:
+			raise WorkerException("Worker with name/id {}".format(value))
 		

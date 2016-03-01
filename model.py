@@ -2,7 +2,7 @@ from core import Kronos
 		
 
 kron = Kronos()
-kron.workers.empty_queue()
+#kron.workers.empty_queue()
 
 '''for job in kron.model.jobs:
 	print job.desc.content

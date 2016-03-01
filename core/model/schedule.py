@@ -4,11 +4,11 @@ class Schedule(object):
 		self.when = when
 
 	def execute(self, security, target, url):
-		pass
+		print self.__class__
 
 	def is_time_for_job(self):
-		pass
+		return False
 
 	def sleep_time(self):
-		pass
+		return 1
 		

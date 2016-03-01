@@ -31,8 +31,8 @@ class Every(Schedule):
 
 		return times
 
-	def execute(self, security, target, url):
-		pass
+	'''def execute(self, security, target, url):
+		pass'''
 
 	def is_time_for_job(self):
 		return datetime.now().today() in self.run_times

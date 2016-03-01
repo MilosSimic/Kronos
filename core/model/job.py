@@ -16,7 +16,7 @@ class Job(object):
 		return self.schedule.is_time_for_job()
 
 	def sleep_time(self):
-		pass
+		return self.schedule.sleep_time()
 
 	def __str__(self):
 		return repr("Desc {}, URL {}, Schedule {}, Priority {}, Security {}, Target {}, Sync {}"
