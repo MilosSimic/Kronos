@@ -1,6 +1,7 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
 from ..util import calculate_today_data, day_of_week, decide_timedelta
+from ..util import get_times_from_every_item
 from ..exception import ArgsException
 
 class Selective(Schedule):
@@ -19,12 +20,13 @@ class Selective(Schedule):
 	def _process_time(self):
 		td = decide_timedelta(self.apendix[0], self.apendix[1])
 
-		if len(self.when.time) == 2:
+		'''if len(self.when.time) == 2:
 			#because i can get only time, put some date just to can do timedelta
 			dt1 = datetime.combine(date.today(), self.when.time[0])
 			dt2 = datetime.combine(date.today(), self.when.time[1])
 		else:
-			raise ArgsException('Args error!No start/end time!')
+			raise ArgsException('Args error!No start/end time!')'''
+		dt1, dt2 = get_times_from_every_item(self.when)
 
 		times = []
 
@@ -47,8 +49,8 @@ class Selective(Schedule):
 		else:
 			raise ArgsException("Args error, not valid amount of time arguments")
 
-	'''def execute(self, security, target, url):
-		pass'''
+	def execute(self, security, target, url):
+		print self.__class__
 
 	def is_time_for_job(self):
 		week_num, day, month, today = calculate_today_data() #week num, day, month, today tuple
@@ -56,7 +58,7 @@ class Selective(Schedule):
 		return week_num in self.ordinal_list and day in self.days_list and today in self.run_times
 
 	def sleep_time(self):
-		pass
+		return 1
 
 	def __str__(self):
 		if self.month_list:

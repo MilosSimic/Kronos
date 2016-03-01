@@ -1,39 +1,10 @@
-"""
-from threading import Lock, Thread
-from time import sleep
-
-LOCK = Lock()
-
-class Worker(Thread):
-	def __init__(self, job, name, threadID, isdaemon=False, nap_time=1):
-		Thread.__init__(self)
-		self.setDaemon(isdaemon)
-		self.nap_time = nap_time
-		self.job = job
-		self.triggerStop = False
-
-	'''
-		When the run() method returns (or sys.exit() is called in the thread), 
-		the thread will be destroyed. All threads in a program must be destroyed before the program terminates. 
-		The program will still be running as long as there is one running thread.
-	'''
-	def run(self):
-		while not self.triggerStop:
-			if self.job.is_time_for_job():
-				#LOCK.acquire()
-				self.job.do_job()
-				#LOCK.release()
-			else:
-				sleep(self.nap_time)
-"""
 from multiprocessing import Process
 from time import sleep
 
 class Worker(Process):
-	def __init__(self, job, threadID, isdaemon=False, nap_time=1):
+	def __init__(self, job, threadID, isdaemon=False):
 		Process.__init__(self)
 		self.daemon = isdaemon
-		self.nap_time = nap_time
 		self.job = job
 		self.triggerStop = False
 
@@ -42,7 +13,7 @@ class Worker(Process):
 			if self.job.is_time_for_job():
 				self.job.do_job()
 			else:
-				sleep(self.nap_time)
+				sleep(self.job.sleep_time())
 				print 'sleep', self.job.description
 
 		print "stop ", self.name

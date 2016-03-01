@@ -62,4 +62,12 @@ def week_count(year, month):
 
 	return len(detail)
 
-	
+def get_times_from_every_item(when):
+	if len(when.time) == 2:
+		#because i can get only time, put some date just to can do timedelta
+		dt1 = datetime.combine(date.today(), when.time[0])
+		dt2 = datetime.combine(date.today(), when.time[1])
+
+		return dt1, dt2
+	else:
+		raise ArgsException('Args error!No start/end time!')	
