@@ -8,4 +8,7 @@ class Schedule(object):
 
 	def is_time_for_job(self):
 		pass
+
+	def sleep_time(self):
+		pass
 		

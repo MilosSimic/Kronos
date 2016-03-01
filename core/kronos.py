@@ -64,8 +64,8 @@ class Kronos(object):
 			if hasattr(job.schedule, 'ordinal'):
 				apendix = None
 
-				if hasattr(job.schedule.when, 'time'):
-					when = When(job.schedule.when.time)
+				if hasattr(job.schedule.when, 'ontime'):
+					when = When(job.schedule.when.ontime.time)
 				else:
 					apendix = self._collect_apendix_for_ordinal(job)
 					when = When(job.schedule.when.when.start.time,

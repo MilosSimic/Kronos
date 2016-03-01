@@ -18,9 +18,9 @@ class Worker(Thread):
 	'''
 	def run(self):
 		while not self.triggerStop:
-			if job.is_time_for_job():
+			if self.job.is_time_for_job():
 				#LOCK.acquire()
-				job.do_job()
+				self.job.do_job()
 				#LOCK.release()
 			else:
 				sleep(self.nap_time)

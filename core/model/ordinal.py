@@ -55,6 +55,9 @@ class Selective(Schedule):
 
 		return week_num in ordinal_list and day in days_list and today in self.run_times
 
+	def sleep_time(self):
+		pass
+
 	def __str__(self):
 		if self.month_list:
 			return repr("Ordinal {}, Days {}, When {}, Months {}".format(self.ordinal_list, self.days_list, self.when, self.month_list))

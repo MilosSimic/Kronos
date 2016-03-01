@@ -27,15 +27,19 @@ CallTime:
 ;
 
 Ordinal:
-	'*'|'1st'|'2nd'|'3rd'|'4th'|'5th'|'6th'|'first'|'second'|'third'|'fourth'|'fifth'|'sixth'
+	'every ordinal'|'1st'|'2nd'|'3rd'|'4th'|'5th'|'6th'|'first'|'second'|'third'|'fourth'|'fifth'|'sixth'
 ;
 
 Day:
-	'*'|'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'
+	'every day'|'mon'|'tue'|'wed'|'thu'|'fri'|'sat'|'sun'
+;
+
+OnTime:
+	('at')? ontime=Time
 ;
 
 TimeSpecial:
-	Every | Time
+	Every | OnTime
 ;
 
 Selective:
@@ -43,5 +47,5 @@ Selective:
 ;
 
 Month:
-	'*'|'jan'|'feb'|'mar'|'apr'|'may'|'jun'|'jul'|'aug'|'sep'|'oct'|'nov'|'dec'
+	'every month'|'jan'|'feb'|'mar'|'apr'|'may'|'jun'|'jul'|'aug'|'sep'|'oct'|'nov'|'dec'
 ;

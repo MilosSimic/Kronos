@@ -37,6 +37,9 @@ class Every(Schedule):
 	def is_time_for_job(self):
 		return datetime.now().today() in self.run_times
 
+	def sleep_time(self):
+		pass
+
 	def __str__(self):
 		return repr("Time {}, Unit {}, When {}".format(self.time, self.unit, self.when))
 		

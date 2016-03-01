@@ -12,7 +12,7 @@ class WorkersList(object):
 	def empty_queue(self):
 		while not self.queue.empty():
 			next_level = self.queue.get()
-			print 'Processing level:', next_level.description
+			print 'Processing level:', next_level.schedule
 
 	def get_from_queue(self):
 		return self.queue.get()
