@@ -23,13 +23,12 @@ class WorkersList(object):
 	def _collect_workers(self):
 		while not self.queue.empty():
 			next_job = self.queue.get()
-			worker = Worker(next_job, next_job.description, next_job.description)
+			worker = Worker(next_job, next_job.description)
 			self.workers.append(worker)
 			worker.start()
 
 	def start(self):
 		self._collect_workers()
-
 		for worker in self.workers:
 			worker.join()
 

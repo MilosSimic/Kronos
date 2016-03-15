@@ -1,28 +1,4 @@
 kronos:
-- description: "Test last part"
-  url: /idem/negde/sada/
-  1st mon of sep,oct,nov at 17:00
-  target: v1
-  security: "AVBGFTTY"
-  sync: true
-  priority: 1
-
-  - description: "Novi test"
-  url: /idem/negde/sada/
-  every ordinal mon of sep,oct,nov every 2 hours from 17:00 to 22:00
-  target: v1
-  security: "AVBGFTTY"
-  sync: true
-  priority: 1
-
-- description: "Koji djavo"
-  url: /idemo/opa/bato/
-  first,2nd every day of every month at 17:00
-
-- description: "Test sa every"
+- description: "Cist every test"
   url: /ko/da/je/bitno/
-  every 3 hours synchronized
-
-  - description: "Cist every test"
-  url: /ko/da/je/bitno/
-  every 3 hours from 15:00 to 16:00
+  every 2 mins from 11:46 to 11:50

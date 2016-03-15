@@ -19,13 +19,6 @@ class Selective(Schedule):
 
 	def _process_time(self):
 		td = decide_timedelta(self.apendix[0], self.apendix[1])
-
-		'''if len(self.when.time) == 2:
-			#because i can get only time, put some date just to can do timedelta
-			dt1 = datetime.combine(date.today(), self.when.time[0])
-			dt2 = datetime.combine(date.today(), self.when.time[1])
-		else:
-			raise ArgsException('Args error!No start/end time!')'''
 		dt1, dt2 = get_times_from_every_item(self.when)
 
 		times = []
@@ -54,10 +47,10 @@ class Selective(Schedule):
 
 	def is_time_for_job(self):
 		week_num, day, month, today = calculate_today_data() #week num, day, month, today tuple
-
 		return week_num in self.ordinal_list and day in self.days_list and today in self.run_times
 
 	def sleep_time(self):
+		# add some algorithm to calculate nap time for this kind of schedule tasks
 		return 1
 
 	def __str__(self):
