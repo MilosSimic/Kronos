@@ -1,4 +1,4 @@
-from core import Kronos
+from kronos.core import Kronos
 		
 
 kron = Kronos()
