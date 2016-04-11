@@ -1,14 +1,11 @@
-#!/usr/bin/env python
-
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='Kronos',
-	version='0.1',
-	description='Scheduled task DSL',
-	author='Milos Simic',
-	author_email='milossimicsimo@gmail.com',
-	url='https://github.com/MilosSimic/Kronos',
-	install_requires = ["textX"],
-    keywords = "scheduled task language DSL",
-	packages=['kronos'],
-)
+      version='0.1',
+      description='DSL tool for scheduled tasking',
+      url='https://github.com/MilosSimic/Kronos',
+      author='Milos Simic',
+      author_email='milossimicsimo@gmail.com',
+      license='MIT',
+      packages=['kronos§'],
+      zip_safe=False)
