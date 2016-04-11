@@ -1,4 +1,4 @@
 kronos:
 - description: "Cist every test"
-  url: /ko/da/je/bitno/
+  url: https://apis.google.com/js/client.js
   every 2 mins from 11:46 to 11:50

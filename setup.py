@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='Kronos',
       version='0.1',
@@ -7,5 +7,10 @@ setup(name='Kronos',
       author='Milos Simic',
       author_email='milossimicsimo@gmail.com',
       license='MIT',
-      packages=['kronos'],
-      zip_safe=False)
+      packages=find_packages(),
+      include_package_data= True,
+      zip_safe=False,
+      package_data = {
+      	'':['*.tx']
+      }
+)
