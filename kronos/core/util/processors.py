@@ -1,6 +1,6 @@
 from datetime import time
 from const import ordinal_dict, every_dict
-from ..exception import ArgsException, LogicException
+from kronos.core.exception import ArgsException, LogicException
 
 def every_command_processor(every_command):
 	if every_command.n < 0:

@@ -1,5 +1,5 @@
 from Queue import PriorityQueue
-from ..exception import WorkerException
+from kronos.core.exception import WorkerException
 from . import Worker
 
 class WorkersList(object):

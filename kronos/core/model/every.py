@@ -1,7 +1,7 @@
 from schedule import Schedule
 from datetime import datetime, timedelta, date
-from ..exception import ArgsException
-from ..util import decide_timedelta, get_times_from_every_item
+from kronos.core.exception import ArgsException
+from kronos.core.util import decide_timedelta, get_times_from_every_item
 from time import sleep
 
 class Every(Schedule):
