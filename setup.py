@@ -7,5 +7,5 @@ setup(name='Kronos',
       author='Milos Simic',
       author_email='milossimicsimo@gmail.com',
       license='MIT',
-      packages=['kronos§'],
+      packages=['kronos'],
       zip_safe=False)
