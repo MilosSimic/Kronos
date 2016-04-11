@@ -1,7 +1,7 @@
 from kronos.core import Kronos
 		
 
-kron = Kronos()
+kron = Kronos(kron_file='test.kronos')
 #kron.workers.empty_queue()
 
 '''for job in kron.model.jobs:

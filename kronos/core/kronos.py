@@ -6,9 +6,11 @@ from exception import LogicException
 from worker import Worker, WorkersList
 from datetime import time, datetime
 
+KRON_GRAMMAR = 'kronos/grammar/kronos.tx'
+
 class Kronos(object):
 	"""docstring for Kronos"""
-	def __init__(self, grammar='grammar/kronos.tx', kron_file='test.kronos', blocking=True):
+	def __init__(self, kron_file, grammar=KRON_GRAMMAR, blocking=True):
 		self._meta_model = metamodel_from_file(grammar)
 		self._add_processors(self._meta_model)
 		self._model = self._meta_model.model_from_file(kron_file)
