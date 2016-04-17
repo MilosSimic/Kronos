@@ -19,7 +19,9 @@ Optionally, users can specify:
 3) ability to sync tasks that access shared data
 4) and service version.
 
-###Kronos Tasks
+There can be a lot of tasks, and the best practice is to separate tasks with one empty line, and every new task to mark with "-" symbol in description part. These are recommendations, not rules and they are optional for convenient reading. It is possible to put one line comments for every task defined. These comments contain plain text, and they are ignored by the interpreter
+
+###Tasks
 Kronos use two kinds of tasks: Every and Selective.
 
 Every rule describes tasks that executes: 
@@ -27,14 +29,18 @@ Every rule describes tasks that executes:
 2) in combination with synchronized rule, users can easily define pattern that repeat during whole day. 
 In both cases tasks is executed in a range of n hours or minutes, but minimum amount is one minute. For shorten writing, users can use mins instead of minutes.
 
+Every task form : 'every N (hours|mins|minutes) ["from" (time) "to" (time)]'
+
 Example:
 kronos:
-- description: "Some random description"
-  url: https://apis.google.com/js/client.js
-  every 2 mins from 11:46 to 11:50
+	description: "Some random description on Every task"
+	url: https://path.to.service/call
+	every 2 mins from 11:46 to 11:50 
 
-On the other hand, Selective rule is designed for tasks that happened, not that often, or for some more complex patterns that needs to be used (Figure 4). Selective rule must be defined in the form: 
-<ordinal number list> <day list> <month list> <when to run>.
+	avoid from 00:00 to 23:59, use synchronized keyword -> every 2 hours synchronized
+
+On the other hand, Selective rule is designed for tasks that happened, not that often, or for some more complex patterns that needs to be used. Selective rule must be defined in the form: 
+(ordinal number list) (day list) (month list) (when to run).
 
 For example, if task need to be executed at the first and the second Monday and Wednesday of September and
 October at specific time, or even in from-to pattern in some range, every n hours or minutes, this rule can offer that
@@ -47,9 +53,20 @@ separated with "," symbol.
 Also, every keyword can be used, if they what to specify that tasks run every day, month or ordinal respecting its place of usage. If the task runs whole day, Synchronized rule can be applied here
 too.
 
+Example:
+kronos:
+	description: "Some random description on Selective task"
+	url: https://path.to.service/call
+	every ordinal mon of sep,oct,nov every 2 hours from 17:00 to 22:00
+
 ##Usage
 from kronos.core import Kronos
 
 kron = Kronos(kron_file='path_to_your_.kronos_file')
 
 run yout python script and that's it :)
+
+##Requires
+python
+textX
+requests
