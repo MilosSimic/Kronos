@@ -32,12 +32,14 @@ In both cases tasks is executed in a range of n hours or minutes, but minimum am
 Every task form : 'every N (hours|mins|minutes) ["from" (time) "to" (time)]'
 
 Example:
+```
 kronos:
 	description: "Some random description on Every task"
 	url: https://path.to.service/call
 	every 2 mins from 11:46 to 11:50 
 
-	avoid from 00:00 to 23:59, use synchronized keyword -> every 2 hours synchronized
+avoid from 00:00 to 23:59, use synchronized keyword -> every 2 hours synchronized
+```
 
 On the other hand, Selective rule is designed for tasks that happened, not that often, or for some more complex patterns that needs to be used. Selective rule must be defined in the form: 
 (ordinal number list) (day list) (month list) (when to run).
@@ -54,9 +56,13 @@ Also, every keyword can be used, if they what to specify that tasks run every da
 too.
 
 Example:
+
 kronos:
+
 	description: "Some random description on Selective task"
+
 	url: https://path.to.service/call
+
 	every ordinal mon of sep,oct,nov every 2 hours from 17:00 to 22:00
 
 ##Usage
